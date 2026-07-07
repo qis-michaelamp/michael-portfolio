@@ -25,7 +25,7 @@
 }
 
 *, *::before, *::after { margin:0; padding:0; box-sizing:border-box; }
-html { scroll-behavior: smooth; }
+html { scroll-behavior: auto; }
 
 body {
   font-family: 'IBM Plex Sans', sans-serif;
@@ -962,6 +962,35 @@ footer {
 </footer>
 
 <script>
+// Smooth scroll
+document.querySelectorAll('a[href^="#"]').forEach(a => {
+  a.addEventListener('click', e => {
+    const target = document.querySelector(a.getAttribute('href'));
+    if (!target) return;
+    e.preventDefault();
+    const navH = 54;
+    const top = target.getBoundingClientRect().top + window.scrollY - navH;
+    const start = window.scrollY;
+    const diff = top - start;
+    const duration = Math.min(800, Math.max(400, Math.abs(diff) * 0.4));
+    let startTime = null;
+
+    function easeInOutCubic(t) {
+      return t < 0.5 ? 4*t*t*t : 1 - Math.pow(-2*t+2,3)/2;
+    }
+
+    function step(ts) {
+      if (!startTime) startTime = ts;
+      const elapsed = ts - startTime;
+      const progress = Math.min(elapsed / duration, 1);
+      window.scrollTo(0, start + diff * easeInOutCubic(progress));
+      if (progress < 1) requestAnimationFrame(step);
+    }
+
+    requestAnimationFrame(step);
+  });
+});
+
 const i18n = {
   en: {
     nav_about: "About", nav_exp: "Experience", nav_skills: "Skills",
