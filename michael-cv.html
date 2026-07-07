@@ -1,0 +1,1079 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Michael Andhika — Integration & Middleware Specialist</title>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link href="https://fonts.googleapis.com/css2?family=IBM+Plex+Sans:wght@300;400;500;600;700&family=IBM+Plex+Mono:wght@400;500&display=swap" rel="stylesheet">
+<style>
+:root {
+  --bg:      #FFFFFF;
+  --off:     #F5F5F5;
+  --text:    #111111;
+  --muted:   #666666;
+  --border:  #E0E0E0;
+  --accent:  #1A1A1A;
+  --tag-bg:  #F0F0F0;
+  --tag-hl:  #E8F0FE;
+  --tag-hlc: #1A56DB;
+  --navy:    #0F1F35;
+  --navyL:   #172840;
+  --hero-t:  #FFFFFF;
+  --hero-m:  rgba(255,255,255,0.55);
+  --stat-c:  #60A5FA;
+}
+
+*, *::before, *::after { margin:0; padding:0; box-sizing:border-box; }
+html { scroll-behavior: smooth; }
+
+body {
+  font-family: 'IBM Plex Sans', sans-serif;
+  background: var(--bg);
+  color: var(--text);
+  font-size: 15px;
+  line-height: 1.6;
+}
+
+/* ── NAV ── */
+nav {
+  position: fixed;
+  top: 0; left: 0; right: 0;
+  z-index: 100;
+  background: var(--navy);
+  height: 54px;
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  padding: 0 48px;
+  border-bottom: 1px solid rgba(255,255,255,0.07);
+}
+
+.nav-logo {
+  font-family: 'IBM Plex Mono', monospace;
+  font-size: 14px;
+  color: var(--hero-t);
+  letter-spacing: 0.5px;
+}
+
+.nav-right {
+  display: flex;
+  align-items: center;
+  gap: 8px;
+}
+
+.nav-links {
+  display: flex;
+  gap: 4px;
+  list-style: none;
+  margin-right: 16px;
+}
+
+.nav-links a {
+  font-size: 13px;
+  font-weight: 500;
+  color: rgba(255,255,255,0.55);
+  text-decoration: none;
+  padding: 5px 10px;
+  border-radius: 3px;
+  transition: color 0.15s, background 0.15s;
+}
+
+.nav-links a:hover {
+  color: #fff;
+  background: rgba(255,255,255,0.08);
+}
+
+/* Lang toggle */
+.lang-toggle {
+  display: flex;
+  border: 1px solid rgba(255,255,255,0.15);
+  border-radius: 3px;
+  overflow: hidden;
+}
+
+.lang-btn {
+  font-family: 'IBM Plex Mono', monospace;
+  font-size: 11px;
+  font-weight: 500;
+  letter-spacing: 1px;
+  padding: 5px 12px;
+  border: none;
+  cursor: pointer;
+  background: transparent;
+  color: rgba(255,255,255,0.45);
+  transition: background 0.15s, color 0.15s;
+}
+
+.lang-btn.active {
+  background: rgba(255,255,255,0.12);
+  color: #fff;
+}
+
+/* ── HERO ── */
+.hero {
+  min-height: 100vh;
+  background: var(--navy);
+  display: flex;
+  align-items: center;
+  padding: 96px 48px 80px;
+}
+
+.hero-inner {
+  max-width: 820px;
+  margin: 0 auto;
+  width: 100%;
+  display: grid;
+  grid-template-columns: 1fr auto;
+  gap: 48px;
+  align-items: center;
+}
+
+.hero-text { display: flex; flex-direction: column; }
+
+/* Photo */
+.hero-photo-wrap {
+  flex-shrink: 0;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  gap: 10px;
+}
+
+.hero-photo {
+  width: 180px;
+  height: 180px;
+  border: 2px solid rgba(255,255,255,0.12);
+  object-fit: cover;
+  object-position: center top;
+  display: block;
+  background: var(--navyL);
+}
+
+.hero-photo-placeholder {
+  width: 180px;
+  height: 180px;
+  border: 2px dashed rgba(255,255,255,0.15);
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+  gap: 8px;
+  background: rgba(255,255,255,0.03);
+}
+
+.hero-photo-placeholder svg {
+  width: 36px; height: 36px;
+  stroke: rgba(255,255,255,0.2);
+  fill: none; stroke-width: 1.5;
+}
+
+.hero-photo-placeholder span {
+  font-family: 'IBM Plex Mono', monospace;
+  font-size: 9px;
+  color: rgba(255,255,255,0.2);
+  letter-spacing: 1px;
+  text-transform: uppercase;
+  text-align: center;
+  line-height: 1.5;
+}
+
+.hero-mono {
+  font-family: 'IBM Plex Mono', monospace;
+  font-size: 11px;
+  color: var(--stat-c);
+  letter-spacing: 2px;
+  text-transform: uppercase;
+  margin-bottom: 20px;
+}
+
+.hero-name {
+  font-size: clamp(34px, 5vw, 58px);
+  font-weight: 700;
+  color: var(--hero-t);
+  line-height: 1.08;
+  letter-spacing: -1px;
+  margin-bottom: 18px;
+}
+
+.hero-name .line2 { color: var(--stat-c); display: block; }
+
+.hero-tagline {
+  font-size: 16px;
+  color: var(--hero-m);
+  max-width: 480px;
+  line-height: 1.75;
+  margin-bottom: 36px;
+  font-weight: 400;
+}
+
+.hero-ctas { display: flex; gap: 10px; flex-wrap: wrap; }
+
+.btn-primary {
+  background: #fff;
+  color: var(--navy);
+  font-size: 13px;
+  font-weight: 700;
+  padding: 10px 24px;
+  border: none;
+  cursor: pointer;
+  text-decoration: none;
+  display: inline-block;
+  letter-spacing: 0.3px;
+  transition: background 0.15s;
+}
+
+.btn-primary:hover { background: #e2e8f0; }
+
+.btn-ghost {
+  background: transparent;
+  color: rgba(255,255,255,0.7);
+  font-size: 13px;
+  font-weight: 600;
+  padding: 10px 24px;
+  border: 1px solid rgba(255,255,255,0.18);
+  cursor: pointer;
+  text-decoration: none;
+  display: inline-block;
+  letter-spacing: 0.3px;
+  transition: border-color 0.15s, color 0.15s;
+}
+
+.btn-ghost:hover { border-color: rgba(255,255,255,0.5); color: #fff; }
+
+/* ── STATS ── */
+.stats-bar {
+  background: var(--navyL);
+  border-bottom: 1px solid rgba(255,255,255,0.07);
+  padding: 0 48px;
+}
+
+.stats-inner {
+  max-width: 820px;
+  margin: 0 auto;
+  display: grid;
+  grid-template-columns: repeat(5, 1fr);
+}
+
+.stat-item {
+  padding: 26px 16px;
+  text-align: center;
+  border-right: 1px solid rgba(255,255,255,0.07);
+}
+
+.stat-item:last-child { border-right: none; }
+
+.stat-num {
+  font-family: 'IBM Plex Mono', monospace;
+  font-size: 28px;
+  font-weight: 500;
+  color: var(--stat-c);
+  line-height: 1;
+  margin-bottom: 5px;
+}
+
+.stat-label {
+  font-size: 10.5px;
+  color: rgba(255,255,255,0.38);
+  text-transform: uppercase;
+  letter-spacing: 1px;
+  font-weight: 500;
+}
+
+/* ── SECTIONS ── */
+.section { padding: 72px 48px; }
+.section-inner { max-width: 820px; margin: 0 auto; }
+.section-alt { background: var(--off); }
+
+.section-label {
+  font-family: 'IBM Plex Mono', monospace;
+  font-size: 10.5px;
+  color: var(--muted);
+  letter-spacing: 2px;
+  text-transform: uppercase;
+  margin-bottom: 6px;
+}
+
+.section-title {
+  font-size: clamp(22px, 3vw, 30px);
+  font-weight: 700;
+  color: var(--text);
+  letter-spacing: -0.4px;
+  line-height: 1.2;
+  margin-bottom: 8px;
+}
+
+.section-rule {
+  width: 32px; height: 2px;
+  background: var(--text);
+  margin-bottom: 36px;
+}
+
+/* ── ABOUT ── */
+.about-grid {
+  display: grid;
+  grid-template-columns: 3fr 2fr;
+  gap: 56px;
+  align-items: start;
+}
+
+.about-text p {
+  font-size: 15px;
+  color: #333;
+  line-height: 1.8;
+  margin-bottom: 13px;
+}
+
+.about-text p:last-child { margin-bottom: 0; }
+.about-text strong { color: var(--text); font-weight: 600; }
+
+.about-meta { display: flex; flex-direction: column; }
+
+.meta-row {
+  padding: 12px 0;
+  border-bottom: 1px solid var(--border);
+}
+
+.meta-row:first-child { border-top: 1px solid var(--border); }
+
+.meta-key {
+  font-family: 'IBM Plex Mono', monospace;
+  font-size: 10px;
+  color: var(--muted);
+  text-transform: uppercase;
+  letter-spacing: 1.5px;
+  margin-bottom: 2px;
+}
+
+.meta-val { font-size: 13px; font-weight: 600; color: var(--text); }
+
+/* ── TIMELINE ── */
+.timeline { position: relative; padding-left: 0; }
+
+.timeline::before {
+  content: '';
+  position: absolute;
+  left: 108px; top: 0; bottom: 0;
+  width: 1px;
+  background: var(--border);
+}
+
+.tl-item {
+  display: grid;
+  grid-template-columns: 108px 1fr;
+  position: relative;
+}
+
+.tl-item + .tl-item { border-top: 1px solid var(--border); }
+
+.tl-left {
+  padding: 26px 20px 26px 0;
+  text-align: right;
+  position: relative;
+}
+
+.tl-left::after {
+  content: '';
+  position: absolute;
+  right: -5px; top: 32px;
+  width: 9px; height: 9px;
+  border-radius: 50%;
+  background: var(--bg);
+  border: 2px solid var(--border);
+  z-index: 1;
+}
+
+.tl-item.active .tl-left::after {
+  background: var(--text);
+  border-color: var(--text);
+}
+
+.tl-period {
+  font-family: 'IBM Plex Mono', monospace;
+  font-size: 10.5px;
+  color: var(--muted);
+  line-height: 1.5;
+}
+
+.tl-item.active .tl-period { color: var(--text); font-weight: 500; }
+
+.tl-right { padding: 26px 0 26px 28px; }
+
+.tl-role {
+  font-size: 15px;
+  font-weight: 700;
+  color: var(--text);
+  margin-bottom: 2px;
+}
+
+.tl-company {
+  font-family: 'IBM Plex Mono', monospace;
+  font-size: 10.5px;
+  color: var(--muted);
+  text-transform: uppercase;
+  letter-spacing: 1px;
+  margin-bottom: 10px;
+}
+
+.tl-desc {
+  font-size: 13.5px;
+  color: #444;
+  line-height: 1.7;
+  margin-bottom: 12px;
+}
+
+.tl-tags { display: flex; flex-wrap: wrap; gap: 5px; }
+
+.tl-tag {
+  font-size: 11px;
+  padding: 2px 9px;
+  background: var(--tag-bg);
+  border: 1px solid var(--border);
+  color: var(--muted);
+  font-weight: 500;
+}
+
+/* ── SKILLS ── */
+.skills-table { width: 100%; border-collapse: collapse; }
+.skills-table tr { border-bottom: 1px solid var(--border); }
+.skills-table tr:first-child { border-top: 1px solid var(--border); }
+
+.skills-table td { padding: 15px 0; vertical-align: top; }
+
+.skills-table td:first-child {
+  width: 160px;
+  font-family: 'IBM Plex Mono', monospace;
+  font-size: 10.5px;
+  color: var(--muted);
+  text-transform: uppercase;
+  letter-spacing: 1.5px;
+  padding-right: 20px;
+  padding-top: 18px;
+}
+
+.skill-tags { display: flex; flex-wrap: wrap; gap: 6px; }
+
+.s-tag {
+  font-size: 12px;
+  padding: 4px 11px;
+  background: var(--tag-bg);
+  border: 1px solid var(--border);
+  color: var(--text);
+  font-weight: 500;
+}
+
+.s-tag.hl {
+  background: var(--tag-hl);
+  border-color: #BFD0F7;
+  color: var(--tag-hlc);
+  font-weight: 600;
+}
+
+/* ── PROJECTS ── */
+.projects-list { display: flex; flex-direction: column; }
+
+.project-row {
+  display: grid;
+  grid-template-columns: 200px 1fr 180px;
+  gap: 24px;
+  padding: 22px 0;
+  border-bottom: 1px solid var(--border);
+  align-items: start;
+}
+
+.project-row:first-child { border-top: 1px solid var(--border); }
+
+.project-name { font-size: 14px; font-weight: 700; color: var(--text); }
+
+.project-desc { font-size: 13px; color: var(--muted); line-height: 1.65; }
+
+.project-stack { display: flex; flex-wrap: wrap; gap: 5px; justify-content: flex-end; }
+
+.p-tag {
+  font-family: 'IBM Plex Mono', monospace;
+  font-size: 10px;
+  padding: 2px 8px;
+  background: var(--tag-bg);
+  border: 1px solid var(--border);
+  color: var(--muted);
+}
+
+/* ── INTEGRATION ── */
+.int-section {
+  background: var(--navy);
+  padding: 72px 48px;
+}
+
+.int-section .section-label { color: rgba(255,255,255,0.35); }
+.int-section .section-title { color: #fff; }
+.int-section .section-rule { background: rgba(255,255,255,0.2); }
+
+.int-grid {
+  display: grid;
+  grid-template-columns: repeat(3, 1fr);
+  border-top: 1px solid rgba(255,255,255,0.07);
+  border-left: 1px solid rgba(255,255,255,0.07);
+}
+
+.int-card {
+  border-right: 1px solid rgba(255,255,255,0.07);
+  border-bottom: 1px solid rgba(255,255,255,0.07);
+  padding: 22px 18px;
+  transition: background 0.15s;
+}
+
+.int-card:hover { background: rgba(255,255,255,0.04); }
+
+.int-num {
+  font-family: 'IBM Plex Mono', monospace;
+  font-size: 10px;
+  color: rgba(255,255,255,0.2);
+  margin-bottom: 8px;
+  letter-spacing: 1px;
+}
+
+.int-title { font-size: 13px; font-weight: 700; color: #fff; margin-bottom: 5px; }
+.int-desc { font-size: 11.5px; color: rgba(255,255,255,0.38); line-height: 1.55; }
+
+/* ── CONTACT ── */
+.contact-grid {
+  display: grid;
+  grid-template-columns: 1fr 1fr;
+  gap: 56px;
+  align-items: start;
+}
+
+.contact-intro { font-size: 15px; color: var(--muted); line-height: 1.8; margin-bottom: 28px; }
+
+.contact-list { display: flex; flex-direction: column; }
+
+.contact-row {
+  display: flex;
+  align-items: center;
+  gap: 14px;
+  padding: 14px 0;
+  border-bottom: 1px solid var(--border);
+  text-decoration: none;
+}
+
+.contact-row:first-child { border-top: 1px solid var(--border); }
+.contact-row:hover .contact-val { color: var(--tag-hlc); }
+
+.contact-icon {
+  width: 34px; height: 34px;
+  background: var(--navy);
+  display: flex; align-items: center; justify-content: center;
+  flex-shrink: 0;
+}
+
+.contact-icon svg { width: 14px; height: 14px; stroke: rgba(255,255,255,0.6); fill: none; stroke-width: 2; }
+
+.contact-key {
+  font-family: 'IBM Plex Mono', monospace;
+  font-size: 10px;
+  color: var(--muted);
+  text-transform: uppercase;
+  letter-spacing: 1px;
+  margin-bottom: 1px;
+}
+
+.contact-val { font-size: 13px; font-weight: 600; color: var(--text); transition: color 0.15s; }
+
+.avail-box {
+  background: var(--navy);
+  padding: 28px;
+}
+
+.avail-top {
+  font-family: 'IBM Plex Mono', monospace;
+  font-size: 10px;
+  color: rgba(255,255,255,0.3);
+  text-transform: uppercase;
+  letter-spacing: 2px;
+  margin-bottom: 14px;
+}
+
+.avail-status {
+  display: flex; align-items: center; gap: 9px;
+  font-size: 15px; font-weight: 600; color: #fff;
+  margin-bottom: 14px;
+}
+
+.avail-dot {
+  width: 7px; height: 7px;
+  background: #22C55E; border-radius: 50%;
+}
+
+.avail-note { font-size: 13px; color: rgba(255,255,255,0.38); line-height: 1.7; }
+
+/* ── FOOTER ── */
+footer {
+  background: var(--navy);
+  padding: 18px 48px;
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  border-top: 1px solid rgba(255,255,255,0.06);
+}
+
+.footer-l {
+  font-family: 'IBM Plex Mono', monospace;
+  font-size: 12px;
+  color: rgba(255,255,255,0.25);
+}
+
+.footer-r { font-size: 12px; color: rgba(255,255,255,0.2); }
+
+/* ── RESPONSIVE ── */
+@media (max-width: 768px) {
+  nav { padding: 0 20px; }
+  .nav-links { display: none; }
+  .hero, .section, .int-section { padding-left: 20px; padding-right: 20px; }
+  .stats-bar { padding: 0 20px; }
+  .stats-inner { grid-template-columns: repeat(3, 1fr); }
+  .hero-inner { grid-template-columns: 1fr; gap: 28px; }
+  .hero-photo-wrap { order: -1; align-items: flex-start; }
+  .hero-photo, .hero-photo-placeholder { width: 100px; height: 100px; }
+  .about-grid, .contact-grid { grid-template-columns: 1fr; gap: 28px; }
+  .timeline::before { left: 72px; }
+  .tl-item { grid-template-columns: 72px 1fr; }
+  .skills-table td:first-child { width: 100px; font-size: 9.5px; }
+  .project-row { grid-template-columns: 1fr; gap: 6px; }
+  .project-stack { justify-content: flex-start; }
+  .int-grid { grid-template-columns: repeat(2, 1fr) !important; }
+  footer { padding: 14px 20px; flex-direction: column; gap: 4px; text-align: center; }
+}
+</style>
+</head>
+<body>
+
+<!-- NAV -->
+<nav>
+  <div class="nav-logo">michael.dev</div>
+  <div class="nav-right">
+    <ul class="nav-links">
+      <li><a href="#about" data-i18n="nav_about">About</a></li>
+      <li><a href="#experience" data-i18n="nav_exp">Experience</a></li>
+      <li><a href="#skills" data-i18n="nav_skills">Skills</a></li>
+      <li><a href="#projects" data-i18n="nav_projects">Projects</a></li>
+      <li><a href="#contact" data-i18n="nav_contact">Contact</a></li>
+    </ul>
+    <div class="lang-toggle">
+      <button class="lang-btn active" onclick="setLang('en')">EN</button>
+      <button class="lang-btn" onclick="setLang('id')">ID</button>
+    </div>
+  </div>
+</nav>
+
+<!-- HERO -->
+<section class="hero">
+  <div class="hero-inner">
+    <div class="hero-text">
+      <div class="hero-mono" data-i18n="hero_label">Integration & Middleware Specialist</div>
+      <h1 class="hero-name">
+        Michael Andhika
+        <span class="line2">Mahendra Pratama</span>
+      </h1>
+      <p class="hero-tagline" data-i18n="hero_tagline">
+        8+ years architecting healthcare IT integrations across 50+ hospitals in Indonesia — bridging clinical systems, medical devices, and national health infrastructure.
+      </p>
+      <div class="hero-ctas">
+        <a href="#contact" class="btn-primary" data-i18n="hero_cta1">Get In Touch</a>
+        <a href="#projects" class="btn-ghost" data-i18n="hero_cta2">View Projects</a>
+      </div>
+    </div>
+
+    <div class="hero-photo-wrap">
+      <!--
+        CARA PASANG FOTO:
+        1. Convert foto lo ke base64:
+           - Buka: https://www.base64-image.de
+           - Upload foto, copy hasilnya
+        2. Ganti tag di bawah ini:
+           Hapus div.hero-photo-placeholder
+           Uncomment tag <img> dan isi src-nya
+
+        <img
+          class="hero-photo"
+          src="data:image/jpeg;base64,GANTI_DENGAN_BASE64_STRING_LO_DI_SINI"
+          alt="Michael Andhika Mahendra Pratama"
+        />
+      -->
+      <div class="hero-photo-placeholder">
+        <svg viewBox="0 0 24 24"><path d="M20 21v-2a4 4 0 0 0-4-4H8a4 4 0 0 0-4 4v2"/><circle cx="12" cy="7" r="4"/></svg>
+        <span>Foto<br>placeholder</span>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- STATS -->
+<div class="stats-bar">
+  <div class="stats-inner">
+    <div class="stat-item">
+      <div class="stat-num">8+</div>
+      <div class="stat-label" data-i18n="stat1">Years Exp.</div>
+    </div>
+    <div class="stat-item">
+      <div class="stat-num">50+</div>
+      <div class="stat-label" data-i18n="stat2">Hospitals</div>
+    </div>
+    <div class="stat-item">
+      <div class="stat-num">5</div>
+      <div class="stat-label" data-i18n="stat3">LIS Vendors</div>
+    </div>
+    <div class="stat-item">
+      <div class="stat-num">8</div>
+      <div class="stat-label" data-i18n="stat4">RIS Vendors</div>
+    </div>
+    <div class="stat-item">
+      <div class="stat-num">13+</div>
+      <div class="stat-label" data-i18n="stat5">Integrations</div>
+    </div>
+  </div>
+</div>
+
+<!-- ABOUT -->
+<section class="section" id="about">
+  <div class="section-inner">
+    <div class="section-label" data-i18n="about_label">About</div>
+    <h2 class="section-title" data-i18n="about_title">Integration specialist,<br>healthcare infrastructure</h2>
+    <div class="section-rule"></div>
+    <div class="about-grid">
+      <div class="about-text">
+        <p data-i18n="about_p1">I'm an Integration & Middleware Specialist based in Gading Serpong, Indonesia with <strong>8+ years of experience</strong> at PT. Quantum Infra Solusindo building on-premise middleware systems deployed across hospital clients nationwide.</p>
+        <p data-i18n="about_p2">My work sits at the intersection of healthcare standards, enterprise software, and real-world clinical operations — translating protocols like <strong>HL7, FHIR R4, DICOM, and BPJS</strong> into reliable production systems.</p>
+        <p data-i18n="about_p3">Currently leading the <strong>Intercon</strong> platform — an integration and connectivity console powering multi-vendor interoperability across 50+ hospital clients.</p>
+      </div>
+      <div class="about-meta">
+        <div class="meta-row">
+          <div class="meta-key" data-i18n="meta_role_k">Current Role</div>
+          <div class="meta-val" data-i18n="meta_role_v">Lead of Intercon</div>
+        </div>
+        <div class="meta-row">
+          <div class="meta-key" data-i18n="meta_co_k">Company</div>
+          <div class="meta-val">PT. Quantum Infra Solusindo</div>
+        </div>
+        <div class="meta-row">
+          <div class="meta-key" data-i18n="meta_edu_k">Education</div>
+          <div class="meta-val">BIT — James Cook University, SG</div>
+        </div>
+        <div class="meta-row">
+          <div class="meta-key" data-i18n="meta_loc_k">Location</div>
+          <div class="meta-val">Gading Serpong, Indonesia</div>
+        </div>
+        <div class="meta-row">
+          <div class="meta-key" data-i18n="meta_lang_k">Languages</div>
+          <div class="meta-val" data-i18n="meta_lang_v">Indonesian · English (Professional)</div>
+        </div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- EXPERIENCE / TIMELINE -->
+<section class="section section-alt" id="experience">
+  <div class="section-inner">
+    <div class="section-label" data-i18n="exp_label">Experience</div>
+    <h2 class="section-title" data-i18n="exp_title">Career timeline</h2>
+    <div class="section-rule"></div>
+    <div class="timeline">
+
+      <div class="tl-item active">
+        <div class="tl-left"><div class="tl-period">2024<br>Present</div></div>
+        <div class="tl-right">
+          <div class="tl-role" data-i18n="tl1_role">Lead of Intercon — Integration & Connectivity</div>
+          <div class="tl-company">PT. Quantum Infra Solusindo</div>
+          <div class="tl-desc" data-i18n="tl1_desc">Leading the Intercon platform — an on-premise integration and connectivity console deployed across 50+ hospital clients. Responsible for architecture decisions, team direction, and delivery of multi-vendor healthcare system integrations including SatuSehat, BPJS, HL7, DICOM, LIS, RIS, and medical IoT devices.</div>
+          <div class="tl-tags">
+            <span class="tl-tag">React</span><span class="tl-tag">ASP.NET Core 8</span><span class="tl-tag">SatuSehat</span><span class="tl-tag">BPJS</span><span class="tl-tag">HL7</span><span class="tl-tag">DICOM</span><span class="tl-tag">SQL Server</span><span class="tl-tag">JWT/SSO</span>
+          </div>
+        </div>
+      </div>
+
+      <div class="tl-item">
+        <div class="tl-left"><div class="tl-period">2020<br>2024</div></div>
+        <div class="tl-right">
+          <div class="tl-role" data-i18n="tl2_role">Research & Developer — Innovation Division</div>
+          <div class="tl-company">PT. Quantum Infra Solusindo</div>
+          <div class="tl-desc" data-i18n="tl2_desc">Spearheaded R&D initiatives in healthcare interoperability. Pioneered integrations with SatuSehat/FHIR R4, BPJS, and DICOM. Developed middleware covering LIS, RIS, medical IoT devices (infusion pumps, vital sign monitors), digital health channels (WABA, mobile apps), and payment gateways.</div>
+          <div class="tl-tags">
+            <span class="tl-tag">FHIR R4</span><span class="tl-tag">MLLP</span><span class="tl-tag">MQTT</span><span class="tl-tag">HMAC-SHA256</span><span class="tl-tag">Worker Services</span><span class="tl-tag">WinForms</span>
+          </div>
+        </div>
+      </div>
+
+      <div class="tl-item">
+        <div class="tl-left"><div class="tl-period">2017<br>2020</div></div>
+        <div class="tl-right">
+          <div class="tl-role" data-i18n="tl3_role">Research & Developer</div>
+          <div class="tl-company">PT. Quantum Infra Solusindo</div>
+          <div class="tl-desc" data-i18n="tl3_desc">Built core middleware and integration systems in .NET and SQL Server. Established foundational architecture patterns for on-premise hospital IT deployments. Developed REST APIs, authentication systems, and direct hardware integrations including EDC devices and printing services.</div>
+          <div class="tl-tags">
+            <span class="tl-tag">ASP.NET</span><span class="tl-tag">C#</span><span class="tl-tag">SQL Server</span><span class="tl-tag">IIS</span><span class="tl-tag">RBAC</span><span class="tl-tag">TCP/Serial</span>
+          </div>
+        </div>
+      </div>
+
+    </div>
+  </div>
+</section>
+
+<!-- SKILLS -->
+<section class="section" id="skills">
+  <div class="section-inner">
+    <div class="section-label" data-i18n="skills_label">Skills</div>
+    <h2 class="section-title" data-i18n="skills_title">Technologies & expertise</h2>
+    <div class="section-rule"></div>
+    <table class="skills-table">
+      <tr>
+        <td data-i18n="sk_lang">Languages</td>
+        <td><div class="skill-tags"><span class="s-tag">C#</span><span class="s-tag">JavaScript</span><span class="s-tag">SQL</span></div></td>
+      </tr>
+      <tr>
+        <td data-i18n="sk_fw">Frameworks</td>
+        <td><div class="skill-tags"><span class="s-tag">ASP.NET Core 8</span><span class="s-tag">ASP.NET Framework</span><span class="s-tag">React</span><span class="s-tag">Vite</span></div></td>
+      </tr>
+      <tr>
+        <td data-i18n="sk_hc">Healthcare</td>
+        <td><div class="skill-tags"><span class="s-tag hl">HL7</span><span class="s-tag hl">FHIR R4</span><span class="s-tag hl">SatuSehat</span><span class="s-tag hl">BPJS</span><span class="s-tag hl">DICOM</span><span class="s-tag hl">MLLP</span></div></td>
+      </tr>
+      <tr>
+        <td data-i18n="sk_proto">Protocols</td>
+        <td><div class="skill-tags"><span class="s-tag">MQTT</span><span class="s-tag">JWT / SSO</span><span class="s-tag">HMAC-SHA256</span><span class="s-tag">TCP / Serial</span><span class="s-tag">REST</span></div></td>
+      </tr>
+      <tr>
+        <td data-i18n="sk_tools">Tools</td>
+        <td><div class="skill-tags"><span class="s-tag">Git</span><span class="s-tag">IIS</span><span class="s-tag">SignalR</span><span class="s-tag">Dapper</span><span class="s-tag">Postman</span><span class="s-tag">Jira</span><span class="s-tag">ClickUp</span><span class="s-tag">Zendesk</span></div></td>
+      </tr>
+      <tr>
+        <td data-i18n="sk_db">Database</td>
+        <td><div class="skill-tags"><span class="s-tag">SQL Server</span><span class="s-tag">Windows Services</span><span class="s-tag">Inno Setup</span></div></td>
+      </tr>
+    </table>
+  </div>
+</section>
+
+<!-- PROJECTS -->
+<section class="section section-alt" id="projects">
+  <div class="section-inner">
+    <div class="section-label" data-i18n="proj_label">Projects</div>
+    <h2 class="section-title" data-i18n="proj_title">Selected work</h2>
+    <div class="section-rule"></div>
+    <div class="projects-list">
+
+      <div class="project-row">
+        <div class="project-name">Intercon Console</div>
+        <div class="project-desc" data-i18n="p1_desc">On-premise healthcare integration management console with BFF architecture, SSO/JWT, SatuSehat/BPJS/HL7 monitoring, RBAC, and real-time dashboards across 50+ hospital clients.</div>
+        <div class="project-stack"><span class="p-tag">React</span><span class="p-tag">ASP.NET Core 8</span><span class="p-tag">SignalR</span><span class="p-tag">SQL Server</span></div>
+      </div>
+
+      <div class="project-row">
+        <div class="project-name">DICOM Gateway</div>
+        <div class="project-desc" data-i18n="p2_desc">WinForms DICOM gateway handling SCP/SCU, tag editing, modality worklist management, and FHIR R4 ImagingStudy submission to SatuSehat.</div>
+        <div class="project-stack"><span class="p-tag">C#</span><span class="p-tag">WinForms</span><span class="p-tag">DICOM</span><span class="p-tag">FHIR R4</span></div>
+      </div>
+
+      <div class="project-row">
+        <div class="project-name">MedinfrasEDC Service</div>
+        <div class="project-desc" data-i18n="p3_desc">.NET 8 Worker Service bridging BCA EDC devices over TCP/Serial with binary BCA ECR protocol parsing for hospital payment integration.</div>
+        <div class="project-stack"><span class="p-tag">.NET 8</span><span class="p-tag">Worker Service</span><span class="p-tag">TCP/Serial</span></div>
+      </div>
+
+      <div class="project-row">
+        <div class="project-name">Direct Printing Service</div>
+        <div class="project-desc" data-i18n="p4_desc">.NET 8 Worker Service for direct hospital document printing with multi-instance Inno Setup installer and WinForms tray notification client via Named Pipes.</div>
+        <div class="project-stack"><span class="p-tag">.NET 8</span><span class="p-tag">WinForms</span><span class="p-tag">Named Pipes</span><span class="p-tag">Inno Setup</span></div>
+      </div>
+
+      <div class="project-row">
+        <div class="project-name">Sistem Antrian Admisi</div>
+        <div class="project-desc" data-i18n="p5_desc">Hospital admission queue management system with direct thermal ticket printing, session management, and IIS deployment across hospital client sites.</div>
+        <div class="project-stack"><span class="p-tag">ASP.NET Core 8</span><span class="p-tag">SQL Server</span><span class="p-tag">IIS</span></div>
+      </div>
+
+      <div class="project-row">
+        <div class="project-name">API Consumer Management</div>
+        <div class="project-desc" data-i18n="p6_desc">Centralized API consumer management with HMAC-SHA256 authentication and five-table RBAC schema using DelegatingHandler pattern on ASP.NET Web API 2.</div>
+        <div class="project-stack"><span class="p-tag">ASP.NET Web API 2</span><span class="p-tag">HMAC-SHA256</span><span class="p-tag">RBAC</span></div>
+      </div>
+
+    </div>
+  </div>
+</section>
+
+<!-- INTEGRATION SHOWCASE -->
+<section class="int-section">
+  <div class="section-inner">
+    <div class="section-label" data-i18n="int_label">Integration Coverage</div>
+    <h2 class="section-title" data-i18n="int_title">Systems I've connected</h2>
+    <div class="section-rule"></div>
+    <div class="int-grid">
+      <div class="int-card"><div class="int-num">01</div><div class="int-title" data-i18n="i1t">LIS Integration</div><div class="int-desc" data-i18n="i1d">5 laboratory information system vendors across diverse hospital environments</div></div>
+      <div class="int-card"><div class="int-num">02</div><div class="int-title" data-i18n="i2t">RIS Integration</div><div class="int-desc" data-i18n="i2d">8 radiology IS vendors with DICOM & FHIR R4 compliance</div></div>
+      <div class="int-card"><div class="int-num">03</div><div class="int-title" data-i18n="i3t">Gov & BUMN Systems</div><div class="int-desc" data-i18n="i3d">SatuSehat, BPJS claims & eligibility, national health regulatory compliance</div></div>
+      <div class="int-card"><div class="int-num">04</div><div class="int-title" data-i18n="i4t">Vital Sign Devices</div><div class="int-desc" data-i18n="i4d">Real-time vital sign monitor & smart infusion pump middleware with bidirectional data sync</div></div>
+      <div class="int-card"><div class="int-num">05</div><div class="int-title" data-i18n="i5t">Queue & Registration</div><div class="int-desc" data-i18n="i5d">Queue management systems and web registration portal integrations</div></div>
+      <div class="int-card"><div class="int-num">06</div><div class="int-title" data-i18n="i6t">Mobile & WABA</div><div class="int-desc" data-i18n="i6d">Mobile application integration and WhatsApp Business API connectivity</div></div>
+      <div class="int-card"><div class="int-num">07</div><div class="int-title" data-i18n="i7t">Payment Gateway</div><div class="int-desc" data-i18n="i7d">Multi-provider payment gateway & EDC device bridging for hospital billing workflows</div></div>
+      <div class="int-card"><div class="int-num">08</div><div class="int-title" data-i18n="i8t">e-Signature (Certified)</div><div class="int-desc" data-i18n="i8d">Certified electronic signature integration compliant with Indonesian e-sign regulation (PSrE)</div></div>
+      <div class="int-card"><div class="int-num">09</div><div class="int-title" data-i18n="i9t">Third-party Systems</div><div class="int-desc" data-i18n="i9d">Cross-platform middleware bridging diverse vendor ecosystems at scale</div></div>
+    </div>
+  </div>
+</section>
+
+<!-- CONTACT -->
+<section class="section" id="contact">
+  <div class="section-inner">
+    <div class="section-label" data-i18n="contact_label">Contact</div>
+    <h2 class="section-title" data-i18n="contact_title">Let's connect</h2>
+    <div class="section-rule"></div>
+    <div class="contact-grid">
+      <div>
+        <p class="contact-intro" data-i18n="contact_intro">Open to integration engineering roles, healthcare IT consultancy, and middleware architecture opportunities. Reach out via any channel below.</p>
+        <div class="contact-list">
+          <a href="mailto:michaelandhika911@gmail.com" class="contact-row">
+            <div class="contact-icon"><svg viewBox="0 0 24 24"><rect x="2" y="4" width="20" height="16" rx="2"/><path d="m2 7 10 7 10-7"/></svg></div>
+            <div><div class="contact-key">Email</div><div class="contact-val">michaelandhika911@gmail.com</div></div>
+          </a>
+          <a href="https://wa.me/6285867169333" class="contact-row" target="_blank">
+            <div class="contact-icon"><svg viewBox="0 0 24 24"><path d="M22 16.92v3a2 2 0 0 1-2.18 2 19.79 19.79 0 0 1-8.63-3.07A19.5 19.5 0 0 1 4.69 13a19.79 19.79 0 0 1-3.07-8.67A2 2 0 0 1 3.56 2h3a2 2 0 0 1 2 1.72c.127.96.361 1.903.7 2.81a2 2 0 0 1-.45 2.11L8.09 9.91a16 16 0 0 0 6 6l1.27-1.27a2 2 0 0 1 2.11-.45c.907.339 1.85.573 2.81.7A2 2 0 0 1 22 16.92z"/></svg></div>
+            <div><div class="contact-key">WhatsApp</div><div class="contact-val">+62 858 6716 9333</div></div>
+          </a>
+          <a href="https://www.linkedin.com/in/michael-andhika-mahendra-pratama-bit-775727138" class="contact-row" target="_blank">
+            <div class="contact-icon"><svg viewBox="0 0 24 24"><path d="M16 8a6 6 0 0 1 6 6v7h-4v-7a2 2 0 0 0-4 0v7h-4v-7a6 6 0 0 1 6-6z"/><rect x="2" y="9" width="4" height="12"/><circle cx="4" cy="4" r="2"/></svg></div>
+            <div><div class="contact-key">LinkedIn</div><div class="contact-val">michael-andhika-mahendra-pratama-bit</div></div>
+          </a>
+        </div>
+      </div>
+      <div class="avail-box">
+        <div class="avail-top" data-i18n="avail_top">Current Status</div>
+        <div class="avail-status"><div class="avail-dot"></div><span data-i18n="avail_status">Open to opportunities</span></div>
+        <div class="avail-note" data-i18n="avail_note">Available for full-time roles, contract projects, and technical consultancy in healthcare IT integration and middleware architecture.</div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- FOOTER -->
+<footer>
+  <div class="footer-l">© 2025 Michael Andhika Mahendra Pratama, BIT</div>
+  <div class="footer-r">Next.js · Vercel</div>
+</footer>
+
+<script>
+const i18n = {
+  en: {
+    nav_about: "About", nav_exp: "Experience", nav_skills: "Skills",
+    nav_projects: "Projects", nav_contact: "Contact",
+    hero_label: "Integration & Middleware Specialist",
+    hero_tagline: "8+ years architecting healthcare IT integrations across 50+ hospitals in Indonesia — bridging clinical systems, medical devices, and national health infrastructure.",
+    hero_cta1: "Get In Touch", hero_cta2: "View Projects",
+    stat1: "Years Exp.", stat2: "Hospitals", stat3: "LIS Vendors", stat4: "RIS Vendors", stat5: "Integrations",
+    about_label: "About",
+    about_title: "Integration specialist,<br>healthcare infrastructure",
+    about_p1: "I'm an Integration & Middleware Specialist based in Gading Serpong, Indonesia with <strong>8+ years of experience</strong> at PT. Quantum Infra Solusindo building on-premise middleware systems deployed across hospital clients nationwide.",
+    about_p2: "My work sits at the intersection of healthcare standards, enterprise software, and real-world clinical operations — translating protocols like <strong>HL7, FHIR R4, DICOM, and BPJS</strong> into reliable production systems.",
+    about_p3: "Currently leading the <strong>Intercon</strong> platform — an integration and connectivity console powering multi-vendor interoperability across 50+ hospital clients.",
+    meta_role_k: "Current Role", meta_role_v: "Lead of Intercon",
+    meta_co_k: "Company", meta_edu_k: "Education", meta_loc_k: "Location",
+    meta_lang_k: "Languages", meta_lang_v: "Indonesian · English (Professional)",
+    exp_label: "Experience", exp_title: "Career timeline",
+    tl1_role: "Lead of Intercon — Integration & Connectivity",
+    tl1_desc: "Leading the Intercon platform — an on-premise integration and connectivity console deployed across 50+ hospital clients. Responsible for architecture decisions, team direction, and delivery of multi-vendor healthcare system integrations including SatuSehat, BPJS, HL7, DICOM, LIS, RIS, and medical IoT devices.",
+    tl2_role: "Research & Developer — Innovation Division",
+    tl2_desc: "Spearheaded R&D initiatives in healthcare interoperability. Pioneered integrations with SatuSehat/FHIR R4, BPJS, and DICOM. Developed middleware covering LIS, RIS, medical IoT devices (infusion pumps, vital sign monitors), digital health channels (WABA, mobile apps), and payment gateways.",
+    tl3_role: "Research & Developer",
+    tl3_desc: "Built core middleware and integration systems in .NET and SQL Server. Established foundational architecture patterns for on-premise hospital IT deployments. Developed REST APIs, authentication systems, and direct hardware integrations including EDC devices and printing services.",
+    skills_label: "Skills", skills_title: "Technologies & expertise",
+    sk_lang: "Languages", sk_fw: "Frameworks", sk_hc: "Healthcare",
+    sk_proto: "Protocols", sk_tools: "Tools", sk_db: "Database",
+    proj_label: "Projects", proj_title: "Selected work",
+    p1_desc: "On-premise healthcare integration management console with BFF architecture, SSO/JWT, SatuSehat/BPJS/HL7 monitoring, RBAC, and real-time dashboards across 50+ hospital clients.",
+    p2_desc: "WinForms DICOM gateway handling SCP/SCU, tag editing, modality worklist management, and FHIR R4 ImagingStudy submission to SatuSehat.",
+    p3_desc: ".NET 8 Worker Service bridging BCA EDC devices over TCP/Serial with binary BCA ECR protocol parsing for hospital payment integration.",
+    p4_desc: ".NET 8 Worker Service for direct hospital document printing with multi-instance Inno Setup installer and WinForms tray notification client via Named Pipes.",
+    p5_desc: "Hospital admission queue management system with direct thermal ticket printing, session management, and IIS deployment across hospital client sites.",
+    p6_desc: "Centralized API consumer management with HMAC-SHA256 authentication and five-table RBAC schema using DelegatingHandler pattern on ASP.NET Web API 2.",
+    int_label: "Integration Coverage", int_title: "Systems I've connected",
+    i1t: "LIS Integration", i1d: "5 laboratory information system vendors across diverse hospital environments",
+    i2t: "RIS Integration", i2d: "8 radiology IS vendors with DICOM & FHIR R4 compliance",
+    i3t: "Gov & BUMN Systems", i3d: "SatuSehat, BPJS claims & eligibility, national health regulatory compliance",
+    i4t: "Vital Sign Devices", i4d: "Real-time vital sign monitor & smart infusion pump middleware with bidirectional data sync",
+    i5t: "Queue & Registration", i5d: "Queue management systems and web registration portal integrations",
+    i6t: "Mobile & WABA", i6d: "Mobile application integration and WhatsApp Business API connectivity",
+    i7t: "Payment Gateway", i7d: "Multi-provider payment gateway & EDC device bridging for hospital billing workflows",
+    i8t: "e-Signature (Certified)", i8d: "Certified electronic signature integration compliant with Indonesian e-sign regulation (PSrE)",
+    i9t: "Third-party Systems", i9d: "Cross-platform middleware bridging diverse vendor ecosystems at scale",
+    contact_label: "Contact", contact_title: "Let's connect",
+    contact_intro: "Open to integration engineering roles, healthcare IT consultancy, and middleware architecture opportunities. Reach out via any channel below.",
+    avail_top: "Current Status", avail_status: "Open to opportunities",
+    avail_note: "Available for full-time roles, contract projects, and technical consultancy in healthcare IT integration and middleware architecture."
+  },
+  id: {
+    nav_about: "Tentang", nav_exp: "Pengalaman", nav_skills: "Keahlian",
+    nav_projects: "Proyek", nav_contact: "Kontak",
+    hero_label: "Spesialis Integrasi & Middleware",
+    hero_tagline: "8+ tahun merancang integrasi sistem IT kesehatan di 50+ rumah sakit di Indonesia — menghubungkan sistem klinis, perangkat medis, dan infrastruktur kesehatan nasional.",
+    hero_cta1: "Hubungi Saya", hero_cta2: "Lihat Proyek",
+    stat1: "Tahun Pengalaman", stat2: "Rumah Sakit", stat3: "Vendor LIS", stat4: "Vendor RIS", stat5: "Integrasi",
+    about_label: "Tentang",
+    about_title: "Spesialis integrasi,<br>infrastruktur IT kesehatan",
+    about_p1: "Saya adalah Spesialis Integrasi & Middleware yang berbasis di Gading Serpong, Indonesia dengan <strong>pengalaman 8+ tahun</strong> di PT. Quantum Infra Solusindo membangun sistem middleware on-premise yang diterapkan di rumah sakit klien di seluruh Indonesia.",
+    about_p2: "Pekerjaan saya berada di persimpangan standar kesehatan, perangkat lunak enterprise, dan operasional klinis nyata — menerjemahkan protokol seperti <strong>HL7, FHIR R4, DICOM, dan BPJS</strong> menjadi sistem produksi yang andal.",
+    about_p3: "Saat ini memimpin platform <strong>Intercon</strong> — konsol integrasi dan konektivitas yang mendukung interoperabilitas multi-vendor di 50+ klien rumah sakit.",
+    meta_role_k: "Posisi Saat Ini", meta_role_v: "Lead of Intercon",
+    meta_co_k: "Perusahaan", meta_edu_k: "Pendidikan", meta_loc_k: "Lokasi",
+    meta_lang_k: "Bahasa", meta_lang_v: "Indonesia (Asli) · Inggris (Profesional)",
+    exp_label: "Pengalaman", exp_title: "Linimasa karir",
+    tl1_role: "Lead of Intercon — Integrasi & Konektivitas",
+    tl1_desc: "Memimpin platform Intercon — konsol integrasi dan konektivitas on-premise yang diterapkan di 50+ klien rumah sakit. Bertanggung jawab atas keputusan arsitektur, arah tim, dan pengiriman integrasi sistem kesehatan multi-vendor termasuk SatuSehat, BPJS, HL7, DICOM, LIS, RIS, dan perangkat IoT medis.",
+    tl2_role: "Research & Developer — Divisi Inovasi",
+    tl2_desc: "Menginisiasi R&D dalam interoperabilitas sistem kesehatan. Mempelopori integrasi dengan SatuSehat/FHIR R4, BPJS, dan DICOM. Mengembangkan middleware yang mencakup LIS, RIS, perangkat IoT medis (infusion pump, monitor vital sign), saluran kesehatan digital (WABA, mobile apps), dan payment gateway.",
+    tl3_role: "Research & Developer",
+    tl3_desc: "Membangun sistem middleware dan integrasi inti menggunakan .NET dan SQL Server. Menetapkan pola arsitektur fondasi untuk deployment IT rumah sakit on-premise. Mengembangkan REST API, sistem autentikasi, dan integrasi hardware langsung termasuk perangkat EDC dan layanan cetak.",
+    skills_label: "Keahlian", skills_title: "Teknologi & bidang keahlian",
+    sk_lang: "Bahasa Pemrograman", sk_fw: "Framework", sk_hc: "Standar Kesehatan",
+    sk_proto: "Protokol", sk_tools: "Tools", sk_db: "Database",
+    proj_label: "Proyek", proj_title: "Karya pilihan",
+    p1_desc: "Konsol manajemen integrasi IT kesehatan on-premise dengan arsitektur BFF, SSO/JWT, monitoring SatuSehat/BPJS/HL7, RBAC, dan dashboard real-time di 50+ klien rumah sakit.",
+    p2_desc: "DICOM gateway berbasis WinForms untuk integrasi radiologi SatuSehat, menangani SCP/SCU, pengeditan tag, manajemen worklist modalitas, dan pengiriman resource FHIR R4 ImagingStudy.",
+    p3_desc: "Worker Service .NET 8 sebagai jembatan perangkat EDC BCA melalui TCP/Serial dengan parsing protokol BCA ECR biner untuk integrasi pembayaran rumah sakit.",
+    p4_desc: "Worker Service .NET 8 untuk cetak dokumen rumah sakit langsung dengan installer Inno Setup multi-instance dan klien notifikasi tray WinForms melalui Named Pipes.",
+    p5_desc: "Sistem manajemen antrian admisi rumah sakit dengan cetak tiket termal langsung, manajemen sesi, dan deployment IIS di berbagai klien rumah sakit.",
+    p6_desc: "Manajemen consumer API terpusat dengan autentikasi HMAC-SHA256 dan skema RBAC lima tabel menggunakan pola DelegatingHandler pada ASP.NET Web API 2.",
+    int_label: "Cakupan Integrasi", int_title: "Sistem yang pernah saya hubungkan",
+    i1t: "Integrasi LIS", i1d: "5 vendor sistem informasi laboratorium di berbagai lingkungan rumah sakit",
+    i2t: "Integrasi RIS", i2d: "8 vendor sistem informasi radiologi dengan kepatuhan DICOM & FHIR R4",
+    i3t: "Sistem Pemerintah & BUMN", i3d: "SatuSehat, klaim & kelayakan BPJS, kepatuhan regulasi kesehatan nasional",
+    i4t: "Perangkat Vital Sign", i4d: "Middleware monitor vital sign & smart infusion pump secara real-time dengan sinkronisasi data dua arah",
+    i5t: "Antrian & Registrasi", i5d: "Integrasi sistem antrian dan portal registrasi web",
+    i6t: "Mobile & WABA", i6d: "Integrasi aplikasi mobile dan konektivitas WhatsApp Business API",
+    i7t: "Payment Gateway", i7d: "Integrasi payment gateway multi-provider & bridging perangkat EDC untuk alur tagihan rumah sakit",
+    i8t: "Tanda Tangan Elektronik", i8d: "Integrasi tanda tangan elektronik tersertifikasi sesuai regulasi TTE Indonesia (PSrE)",
+    i9t: "Sistem Pihak Ketiga", i9d: "Middleware lintas platform yang menghubungkan ekosistem vendor beragam dalam skala besar",
+    contact_label: "Kontak", contact_title: "Mari terhubung",
+    contact_intro: "Terbuka untuk peran rekayasa integrasi, konsultasi IT kesehatan, dan peluang arsitektur middleware. Hubungi saya melalui saluran di bawah ini.",
+    avail_top: "Status Saat Ini", avail_status: "Terbuka untuk peluang",
+    avail_note: "Tersedia untuk peran penuh waktu, proyek kontrak, dan konsultasi teknis di bidang integrasi IT kesehatan dan arsitektur middleware."
+  }
+};
+
+let currentLang = 'en';
+
+function setLang(lang) {
+  currentLang = lang;
+  document.querySelectorAll('.lang-btn').forEach(b => {
+    b.classList.toggle('active', b.textContent.toLowerCase() === lang);
+  });
+  document.querySelectorAll('[data-i18n]').forEach(el => {
+    const key = el.getAttribute('data-i18n');
+    if (i18n[lang][key] !== undefined) {
+      el.innerHTML = i18n[lang][key];
+    }
+  });
+  document.documentElement.lang = lang;
+}
+</script>
+</body>
+</html>
